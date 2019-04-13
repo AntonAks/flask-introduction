@@ -16,13 +16,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    library_name = "Poe"
+    library_name = "POE"
     html = """
         <html>
             <h1>Welcome to {{library_name}} library!</h1>
+            {% for item in authors %}
+            <li>{{ item }}</li>
+            {% endfor %}    
         </html>
     """
-    rendered_html = render_template_string(html, library_name=library_name)
+
     authors = ["Alan Poe", "Jorge L. Borges", "Mark Twain"]
+    rendered_html = render_template_string(html, library_name=library_name, authors = authors)
     # Using an <ul> tag add the authors using the template engine
     return rendered_html
